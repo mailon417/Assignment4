@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Mailon_Manasco_Assignment3.Models.Drug>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Inventory</h2>
+
+<h4>
+ @Html.ActionLink("Create New", "Create")&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp @Html.ActionLink("Top 5 Sellers", "TopProduct", "Report")
+</h4>
+<table border="4" cellpadding="8" background="Content/lrock002.jpg">
+    <tr valign="middle">
+        <th>
+            Name
+        </th>
+        <th>
+            Unit Price
+            
+        </th>
+        <th>
+            On Hand
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <center> <tr valign="middle">
+        <td valign="middle">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td valign="middle">
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+          
+        </td>
+        <td valign="middle">
+            @Html.DisplayFor(modelItem => item.QoH)
+        </td>
+        <td valign="middle">
+
+            <a href="@Url.Action("Edit", "Product", new { id = item.DrugId })">
+            <button class="btn btn-warning">Edit</button>
+
+                <a href="@Url.Action("Details", "Product", new { id = item.DrugId })">
+            <button class="btn btn-info">Details</button>
+
+                    <a href="@Url.Action("Delete", "Product", new { id = item.DrugId })">
+            <button class="btn btn-danger">Delete</button>
+</a>
+
+
+        </td>
+    </tr>
+    </center>
+}
+
+</table>

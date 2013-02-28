@@ -1,0 +1,1 @@
+﻿$("#myModal").modal('in')

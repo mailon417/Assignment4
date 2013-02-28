@@ -1,0 +1,38 @@
+﻿@model Mailon_Manasco_Assignment3.ViewModels.CheckoutVM
+<img src="~/Content/pills2.jpg" />
+
+<h2>Here is your order confirmation:</h2>
+<style type="text/css">
+    td
+    {
+        font-size =24pt;
+    }
+</style>
+<table border="8">
+    <tr>
+        <th>Drug</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+    <tr>
+        <td>Tylenol</td>
+        <td>@Model.tylenol</td>
+        <td>@Model.tyTotal</td>
+    </tr>
+    <tr>
+        <td>Ibuprofren</td>
+        <td>@Model.ibuprofren</td>
+        <td>@Model.ibTotal</td>
+    </tr>
+    <tr>
+        <td>Aspirin</td>
+        <td>@Model.aspirin</td>
+        <td>@Model.asTotal</td>
+    </tr>
+</table>
+<br />
+
+<h3>&nbsp Subtotal: @Model.subtotal</h3>
+<h3>&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp    Tax: @Model.tax</h3>
+<hr />
+<h3>&nbsp&nbsp&nbsp  &nbsp&nbsp Total: @Model.total</h3>

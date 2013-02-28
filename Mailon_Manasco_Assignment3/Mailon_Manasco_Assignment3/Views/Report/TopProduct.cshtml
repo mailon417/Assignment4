@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Mailon_Manasco_Assignment3.ViewModels.TopProductVM>
+
+@{
+    ViewBag.Title = "TopProduct";
+}
+
+<h2>Top Products</h2>
+
+@Html.ActionLink("Drug Inventory", "Index", "Product")
+
+<table border="4" cellpadding="8" background="/Content/lrock002.jpg">
+    <tr>
+        <th>Drug</th>
+        <th>Sales</th>
+    </tr>
+    <tr>
+      
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+           $@Html.DisplayFor(modelItem => item.quantitySold)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ACEModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ACEModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="ACEModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Drug" EntityType="ACEModel.Store.Drug" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="ACEModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderLine" EntityType="ACEModel.Store.OrderLine" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Order_Customer" Association="ACEModel.Store.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Drug" Association="ACEModel.Store.FK_OrderLine_Drug">
+            <End Role="Drug" EntitySet="Drug" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Order" Association="ACEModel.Store.FK_OrderLine_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderLine" EntitySet="OrderLine" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UnitPrice" Type="numeric" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="QoH" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="ShipDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="OrderLineId" />
+          </Key>
+          <Property Name="OrderLineId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DrugId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="smallint" Nullable="false" />
+          <Property Name="UnitCost" Type="numeric" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="ACEModel.Store.Customer" Multiplicity="1" />
+          <End Role="Order" Type="ACEModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Drug">
+          <End Role="Drug" Type="ACEModel.Store.Drug" Multiplicity="1" />
+          <End Role="OrderLine" Type="ACEModel.Store.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="DrugId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Order">
+          <End Role="Order" Type="ACEModel.Store.Order" Multiplicity="1" />
+          <End Role="OrderLine" Type="ACEModel.Store.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ACEModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ACEEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="ACEModel.Customer" />
+          <EntitySet Name="Drugs" EntityType="ACEModel.Drug" />
+          <EntitySet Name="Orders" EntityType="ACEModel.Order" />
+          <EntitySet Name="OrderLines" EntityType="ACEModel.OrderLine" />
+          <AssociationSet Name="FK_Order_Customer" Association="ACEModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Drug" Association="ACEModel.FK_OrderLine_Drug">
+            <End Role="Drug" EntitySet="Drugs" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderLine_Order" Association="ACEModel.FK_OrderLine_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderLine" EntitySet="OrderLines" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="ACEModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="QoH" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderLines" Relationship="ACEModel.FK_OrderLine_Drug" FromRole="Drug" ToRole="OrderLine" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShipDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="ACEModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderLines" Relationship="ACEModel.FK_OrderLine_Order" FromRole="Order" ToRole="OrderLine" />
+        </EntityType>
+        <EntityType Name="OrderLine">
+          <Key>
+            <PropertyRef Name="OrderLineId" />
+          </Key>
+          <Property Name="OrderLineId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int16" Nullable="false" />
+          <Property Name="UnitCost" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Drug" Relationship="ACEModel.FK_OrderLine_Drug" FromRole="OrderLine" ToRole="Drug" />
+          <NavigationProperty Name="Order" Relationship="ACEModel.FK_OrderLine_Order" FromRole="OrderLine" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="ACEModel.Customer" Multiplicity="1" />
+          <End Role="Order" Type="ACEModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Drug">
+          <End Role="Drug" Type="ACEModel.Drug" Multiplicity="1" />
+          <End Role="OrderLine" Type="ACEModel.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="DrugId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderLine_Order">
+          <End Role="Order" Type="ACEModel.Order" Multiplicity="1" />
+          <End Role="OrderLine" Type="ACEModel.OrderLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderLine">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ACEModelStoreContainer" CdmEntityContainer="ACEEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="ACEModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="ACEModel.Drug">
+              <MappingFragment StoreEntitySet="Drug">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="QoH" ColumnName="QoH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ACEModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderLines">
+            <EntityTypeMapping TypeName="ACEModel.OrderLine">
+              <MappingFragment StoreEntitySet="OrderLine">
+                <ScalarProperty Name="OrderLineId" ColumnName="OrderLineId" />
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

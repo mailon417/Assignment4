@@ -1,0 +1,131 @@
+﻿<script>
+    !function ($) {
+        $(function () {
+            // carousel demo
+            $('#myCarousel').carousel()
+        })
+    }(window.jQuery)
+    </script>
+
+
+<h2>
+    <img src="../../Content/logo.png" align="left" />
+    <img src="../../Content/logo.png" align="right" />
+    <center>Welcome to ACE Pharmaceuticals! </center>
+    <br />
+    <br />
+    <h2>
+    <center>@Html.ActionLink("Shop Now!", "Order", "Drug") <br /> <br />
+    <li> @Html.ActionLink("Check Inventory Levels", "Index", "Product")</li> <br />
+    <li> @Html.ActionLink("Top 5 Sellers", "TopProduct", "Report")</li> <br /></center>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+        $("#flip").click(function () {
+            $("#panel").slideToggle("slow");
+        });
+    });
+</script>
+ 
+<style type="text/css"> 
+#panel,#flip
+{
+padding:5px;
+text-align:center;
+background-color:#E80D0D;
+border:solid 1px #c3c3c3;
+}
+#panel
+{
+padding:8px;
+display:none;
+}
+</style>
+</head>
+<body>
+ 
+<div id="flip">Locations</div>
+<div id="panel">
+    <center><ul>
+        <li>Tuscaloosa, AL</li><br />
+        <li>Birmingham, AL</li><br />
+        <li>Huntsville, AL</li><br />
+        <li>Montgomery, AL</li><br />
+        <li>Atlanta, GA</li>
+    </ul></center>
+</div>
+        
+        <center><button>Contact Us</button>
+ <p></p>
+  <p>
+    <ul style ="display:none">
+        <p>123 McFarland Blvd</p>
+        <p>Tuscaloosa, AL 35401</p>
+        <p>(205)123-4567</p>
+    </ul>
+  </p>
+</center><script>
+    $("button").click(function () {
+        $("ul").toggle("slow");
+    });
+</script>
+    <br />
+        <!-- Button to trigger modal -->
+<center><div id="click" ><a href="#myModal" style="text-decoration:none; color:black; opacity:.3"  data-toggle="modal" id="text">Click here for a special offer!</a></div></center>
+
+<script>
+    !function ($) {
+        $("#click").mouseenter(function () {
+            $("#text").fadeTo(1500, 1);
+       
+    }).mouseleave(function () {
+            $("#text").fadeTo(1500, .3);
+        });
+    }(window.jQuery);
+</script>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Special Offer!</h3>
+  </div>
+  <div class="modal-body">
+    <p>Ibuprofren now only $0.99!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button type="button" class="btn btn-primary" onclick="<a href="~/Views/Drug/Order.cshtml"/>Order Now</button>
+  </div>
+</div>
+        <br />
+    </h2>
+
+    <hr width="75%" />
+</h2>
+<div id="myCarousel" class="carousel slide">
+ <div class="carousel-inner">
+        <div class="active item">
+            <h1 style="text-align:center"><img  src="../../Content/17483386.jpg" /></h1>
+        </div>
+        <div class="item">
+            <h1 style="text-align:center"><img  src="../../Content/aspirin.jpg" /></h1>
+        </div>
+        <div class="item">
+            <h1 style="text-align:center"><img src="../../Content/advil.jpeg" /></h1>
+        </div>
+        <div class="item">
+            <h1 style="text-align:center"><img src="../../Content/tylenol.jpg"</h1>
+        </div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    
+</div>
+
+<br />
+
+
+

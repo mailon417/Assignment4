@@ -1,0 +1,49 @@
+﻿@model Mailon_Manasco_Assignment3.ViewModels.CheckoutVM
+
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2>Order</h2>
+<style type="text/css">
+    td
+    {
+        font-size =24pt;
+    }
+</style>
+
+
+<form method="post" action="@Url.Content("~/Drug/Checkout")">
+
+
+    <table border="4">
+        <img src="../../Content/logo.png" />
+        <tr>
+            <th>Drug</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr>
+            <td>Tylenol</td>
+            <td>$1.99</td>
+            <td>@Html.EditorFor(m => m.tylenol)</td>
+        </tr>
+        <tr>
+            <td>Ibuprofren</td>
+            <td>$0.99</td>
+            <td>@Html.EditorFor(m => m.ibuprofren)</td>
+        </tr>
+        <tr>
+            <td>Aspirin</td>
+            <td>$1.49</td>
+            <td>@Html.EditorFor(m => m.aspirin)</td>
+        </tr>
+    </table>
+
+    <br />
+
+    <input id="btnCheckout" type="submit" value="Checkout" style="height: 100px; width: 200px; font-size: x-large" />
+
+
+</form>
